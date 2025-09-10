@@ -1,13 +1,240 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CV - Lê Vĩnh Thái</title>
+  <style>
+    :root{
+      --bg:#0f1724; --card:#0b1220; --muted:#9aa4b2; --accent:#06b6d4; --glass: rgba(255,255,255,0.03);
+      --maxw:1100px;
+      --radius:12px;
+      --gap:18px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;background:linear-gradient(180deg,#071028 0%, #071a2b 100%);color:#e6eef6;display:flex;justify-content:center;padding:28px 18px;
+    }
+    .wrap{width:100%;max-width:var(--maxw);display:grid;grid-template-columns:320px 1fr;gap:var(--gap)}
+
+    /* SIDEBAR */
+    .sidebar{background:linear-gradient(180deg,var(--card), #071226);border-radius:var(--radius);padding:22px;box-shadow:0 6px 30px rgba(2,6,23,0.6)}
+    .avatar{width:96px;height:96px;border-radius:14px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:28px;color:#042027}
+    h1{margin:10px 0 2px;font-size:20px}
+    .title{color:var(--muted);font-size:13px;margin-bottom:12px}
+    .contact{font-size:13px;color:var(--muted);line-height:1.6}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--glass);color:var(--muted);font-size:12px;margin:6px 6px 0 0}
+    .nav{margin-top:18px}
+    .nav button{width:100%;text-align:left;padding:10px;border-radius:10px;background:transparent;border:0;color:var(--muted);cursor:pointer;font-size:14px}
+    .nav button.active{background:rgba(255,255,255,0.03);color:#e6eef6}
+
+    /* MAIN */
+    .main{padding:22px;border-radius:var(--radius);background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);box-shadow:0 6px 30px rgba(2,6,23,0.45)}
+    .section{margin-bottom:22px}
+    .section h2{margin:0 0 12px;font-size:18px}
+    .card{background:var(--card);padding:14px;border-radius:10px;margin-bottom:12px}
+    .project-meta{font-size:13px;color:var(--muted);margin-bottom:8px}
+    ul {margin:8px 0 0 18px}
+
+    /* gallery */
+    .gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
+    .thumb{height:110px;border-radius:8px;background:linear-gradient(135deg,#0b1320,#062032);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;cursor:pointer}
+
+    /* responsive */
+    @media (max-width:880px){.wrap{grid-template-columns:1fr;}.sidebar{order:2}.main{order:1}}
+
+    /* small utilities */
+    .row{display:flex;gap:12px;flex-wrap:wrap}
+    .tag{background:var(--glass);padding:6px 8px;border-radius:8px;font-size:12px;color:var(--muted)}
+
+    /* modal */
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,6,23,0.6);z-index:60}
+    .modal.open{display:flex}
+    .modal .imgbox{max-width:90%;max-height:90%;background:#021226;padding:12px;border-radius:10px}
+    .modal img{max-width:100%;max-height:80vh;display:block;border-radius:8px}
+    .close-btn{margin-top:8px;display:flex;justify-content:center}
+    .close-btn button{background:var(--accent);border:0;padding:8px 12px;border-radius:8px;color:#042027;font-weight:600}
+
+    /* small print */
+    footer{opacity:0.6;font-size:12px;color:var(--muted);text-align:center;margin-top:12px}
+
+  </style>
 </head>
 <body>
-    <h1>
-        Thai dep trai
-    </h1>
+  <div class="wrap">
+    <aside class="sidebar">
+      <div style="display:flex;gap:14px;align-items:center">
+        <div class="avatar">LVT</div>
+        <div>
+          <h1>Lê Vĩnh Thái</h1>
+          <div class="title">Sinh viên UIT</div>
+          <div class="pill">Hồ Chí Minh</div>
+        </div>
+      </div>
+
+      <div style="margin-top:14px" class="contact">
+        <div>Email: <strong>23521417@gm.uit.edu.vn</strong></div>
+        <div>Phone: <strong>+84 768411768</strong></div>
+      </div>
+
+      <div class="nav">
+        <button class="active" data-target="info">INFO cá nhân</button>
+        <button data-target="projects">Dự án đã tham dự</button>
+        <button data-target="experience">Kinh nghiệm</button>
+        <button data-target="hobbies">Sở thích</button>
+        <button data-target="strengths">Thế Mạnh</button>
+        <button data-target="books">Sách yêu thích</button>
+        <button data-target="certs">Chứng chỉ</button>
+        <button data-target="gallery">Gallery kỷ niệm</button>
+      </div>
+
+      <div style="margin-top:18px" class="card">
+        <div style="font-size:13px;color:var(--muted)">Tóm tắt</div>
+        <div style="margin-top:8px;font-size:14px">Sinh viên năm 2, thích bạn Xuân Mai, đam mê lập trình web, thích giao diện đẹp và tối ưu trải nghiệm người dùng.</div>
+      </div>
+
+      <div style="margin-top:12px;font-size:13px;color:var(--muted)">
+        <div class="pill">React</div><div class="pill">Java</div><div class="pill">Oracle</div>
+      </div>
+
+    </aside>
+
+    <main class="main">
+      <section id="info" class="section">
+        <h2>INFO cá nhân</h2>
+        <div class="card">
+          <strong>Họ và tên:</strong> Lê Vĩnh Thái<br>
+          <strong>Ngày sinh:</strong> 30/07/2005<br>
+          <strong>Địa chỉ:</strong> Hồ Chí Minh, Việt Nam<br>
+          <p style="margin-top:8px;color:var(--muted)">Tôi là sinh viên ngành Hệ thống thông tin, có kinh nghiệm làm đồ án quản lý hệ thống và giao diện web cơ bản. Thích học hỏi công nghệ mới, làm việc nhóm và tối ưu code.</p>
+        </div>
+      </section>
+
+      <section id="projects" class="section" style="display:none">
+        <h2>Dự án đã tham dự</h2>
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center"><strong>Hệ thống quản lý bảo tàng</strong><span class="project-meta">2025</span></div>
+          <div class="project-meta">Mô tả: Hệ thống quản lý hiện vật, vé, kết nối nhiều bảo tàng, hỗ trợ học thuật.</div>
+          <div class="row" style="margin-top:8px"><span class="tag">Java</span><span class="tag">Oracle</span><span class="tag">React (demo)</span></div>
+        </div>
+
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center"><strong>Website tuyển dụng (mini)</strong><span class="project-meta">2024</span></div>
+          <div class="project-meta">Giao diện đăng tin, quản lý hồ sơ, tích hợp tính năng tìm kiếm.</div>
+          <div class="row" style="margin-top:8px"><span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">Tailwind</span></div>
+        </div>
+      </section>
+
+      <section id="experience" class="section" style="display:none">
+        <h2>Kinh nghiệm</h2>
+        <div class="card">
+          <strong>Chưa tham gia thị trường lao động</strong>
+          <div class="project-meta">06/2024 - 08/2024</div>
+          <ul>
+            <li>Xây dựng giao diện responsive với React.</li>
+            <li>Tối ưu performance và accessibility.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="hobbies" class="section" style="display:none">
+        <h2>Sở thích</h2>
+        <div class="card">
+          <div class="row">
+            <div class="pill">Đọc sách</div>
+            <div class="pill">Chơi game</div>
+            <div class="pill">Lập trình</div>
+            <div class="pill">Cầu lông</div>
+            <div class="pill">Bạn Xuân Mai Hoàng</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="strengths" class="section" style="display:none">
+        <h2>Thế Mạnh</h2>
+        <div class="card">
+          <ul>
+            <li>Ham học hỏi, tiếp thu nhanh.</li>
+            <li>Kỹ năng làm việc nhóm và giao tiếp.</li>
+            <li>Giải quyết vấn đề bằng code.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="books" class="section" style="display:none">
+        <h2>Sách yêu thích</h2>
+        <div class="card">
+          <ol>
+            <li>Harry Potter</li>
+            <li>Hai số phận</li>
+            <li>Cây cam ngọt của tôi</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="certs" class="section" style="display:none">
+        <h2>Các chứng chỉ đã được nhận</h2>
+        <div class="card">
+          <ul>
+            <li>Chứng chỉ Tin học cơ bản</li>
+            <li>TOEIC 650 — IIG Vietnam (12/2023)</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="gallery" class="section" style="display:none">
+        <h2>Gallery kỷ niệm</h2>
+        <div class="card">
+          <div class="gallery-grid">
+            <div class="thumb" data-src="" data-caption="Hình kỷ niệm 1">Hình 1</div>
+            <div class="thumb" data-src="" data-caption="Hình kỷ niệm 2">Hình 2</div>
+            <div class="thumb" data-src="" data-caption="Hình kỷ niệm 3">Hình 3</div>
+            <div class="thumb" data-src="" data-caption="Hình kỷ niệm 4">Hình 4</div>
+          </div>
+        </div>
+      </section>
+
+      <footer>Thiết kế CV — Có thể chỉnh sửa thêm nội dung và hình ảnh.</footer>
+    </main>
+  </div>
+
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="imgbox">
+      <img id="modalImg" src="" alt="photo" />
+      <div class="close-btn"><button id="closeBtn">Đóng</button></div>
+    </div>
+  </div>
+
+  <script>
+    // Navigation logic
+    const buttons = document.querySelectorAll('.nav button');
+    const sections = document.querySelectorAll('.main .section');
+    function show(id){
+      sections.forEach(s=>{ s.style.display = s.id===id ? 'block' : 'none' });
+      buttons.forEach(b=>{ b.classList.toggle('active', b.dataset.target===id) });
+      // scroll to top of main
+      document.querySelector('.main').scrollTop = 0;
+    }
+    buttons.forEach(b=>{ b.addEventListener('click', ()=> show(b.dataset.target)) });
+
+    // gallery modal
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modalImg');
+    document.querySelectorAll('.thumb').forEach(t=>{
+      t.addEventListener('click', ()=>{
+        const src = t.dataset.src || '';
+        modalImg.src = src || 'data:image/svg+xml;utf8,' + encodeURIComponent(`<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"800\" height=\"500\"><rect width=\"100%\" height=\"100%\" fill=\"#081728\"/><text x=\"50%\" y=\"50%\" font-size=\"22\" fill=\"#9aa4b2\" dominant-baseline=\"middle\" text-anchor=\"middle\">Hình mẫu (chèn ảnh)</text></svg>`);
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden','false');
+      })
+    })
+    document.getElementById('closeBtn').addEventListener('click', ()=>{ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); });
+    modal.addEventListener('click', (e)=>{ if(e.target===modal) modal.classList.remove('open'); });
+
+    // initial
+    show('info');
+  </script>
 </body>
 </html>
